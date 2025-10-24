@@ -14,7 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\2 - Application\BarberBoss.Application\BarberBoss.Application.csproj" />
     <ProjectReference Include="..\..\3 - Communication\BarberBoss.Communication\BarberBoss.Communication.csproj" />
+    <ProjectReference Include="..\..\5 - Exception\BarberBoss.Exception\BarberBoss.Exception.csproj" />
   </ItemGroup>
 
 </Project>
