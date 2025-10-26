@@ -1,5 +1,6 @@
 ﻿using BarberBoss.Application.AutoMapper;
 using BarberBoss.Application.UseCases.Invoices.GetAll;
+using BarberBoss.Application.UseCases.Invoices.GetById;
 using BarberBoss.Application.UseCases.Invoices.Register;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,6 +21,7 @@ namespace BarberBoss.Application
 
 
             services.AddScoped<IGetAllInvoiceUseCase, GetAllInvoiceUseCase>();
+            services.AddScoped<IGetByIdInvoiceUseCase, GetByIdInvoiceUseCase>();
 
         }
 

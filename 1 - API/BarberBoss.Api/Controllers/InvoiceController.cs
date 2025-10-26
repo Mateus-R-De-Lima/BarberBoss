@@ -1,8 +1,11 @@
 ﻿using BarberBoss.Application.UseCases.Invoices.GetAll;
+using BarberBoss.Application.UseCases.Invoices.GetById;
 using BarberBoss.Application.UseCases.Invoices.Register;
 using BarberBoss.Communication.Request;
 using BarberBoss.Communication.Response;
+using BarberBoss.Exception.ExceptionsBase;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace BarberBoss.Api.Controllers
 {
@@ -12,12 +15,12 @@ namespace BarberBoss.Api.Controllers
     {
 
         [HttpPost]
-        [ProducesResponseType(typeof(InvoiceResponse),StatusCodes.Status201Created)]
-        public async Task<IActionResult> PostInvoice([FromServices] IRegisterInvoiceUseCase registerInvoiceUseCase,[FromBody] InvoiceRequest request)
+        [ProducesResponseType(typeof(InvoiceResponse), StatusCodes.Status201Created)]
+        public async Task<IActionResult> PostInvoice([FromServices] IRegisterInvoiceUseCase registerInvoiceUseCase, [FromBody] InvoiceRequest request)
         {
             var response = await registerInvoiceUseCase.Execute(request);
 
-            return Created(string.Empty,response);
+            return Created(string.Empty, response);
         }
 
         [HttpGet]
@@ -32,6 +35,19 @@ namespace BarberBoss.Api.Controllers
 
             return NoContent();
 
+        }
+
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(InvoiceResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(NotFoundException),StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetByIdInvoice([FromServices] IGetByIdInvoiceUseCase getByIdInvoiceUseCase,
+                                                        [FromRoute][Required] Guid id)
+        {
+
+            var result = await getByIdInvoiceUseCase.Execute(id);
+
+            return Ok(result);
         }
     }
 }

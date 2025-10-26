@@ -115,6 +115,15 @@ namespace BarberBoss.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Invoice not found..
+        /// </summary>
+        public static string INVOICE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("INVOICE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Notes must be up to 500 characters..
         /// </summary>
         public static string NOTES_LENGTH {
