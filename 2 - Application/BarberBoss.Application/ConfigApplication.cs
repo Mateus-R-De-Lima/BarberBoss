@@ -3,6 +3,7 @@ using BarberBoss.Application.UseCases.Invoices.Delete;
 using BarberBoss.Application.UseCases.Invoices.GetAll;
 using BarberBoss.Application.UseCases.Invoices.GetById;
 using BarberBoss.Application.UseCases.Invoices.Register;
+using BarberBoss.Application.UseCases.Invoices.Update;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BarberBoss.Application
@@ -20,6 +21,8 @@ namespace BarberBoss.Application
         {
             services.AddScoped<IRegisterInvoiceUseCase, RegisterInvoiceUseCase>();
             services.AddScoped<IDeleteInvoiceUseCase, DeleteInvoiceUseCase>();
+
+            services.AddScoped<IUpdateInvoiceUseCase, UpdateInvoiceUseCase>();
 
 
             services.AddScoped<IGetAllInvoiceUseCase, GetAllInvoiceUseCase>();

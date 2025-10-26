@@ -2,8 +2,10 @@
 using BarberBoss.Application.UseCases.Invoices.GetAll;
 using BarberBoss.Application.UseCases.Invoices.GetById;
 using BarberBoss.Application.UseCases.Invoices.Register;
+using BarberBoss.Application.UseCases.Invoices.Update;
 using BarberBoss.Communication.Request;
 using BarberBoss.Communication.Response;
+using BarberBoss.Exception;
 using BarberBoss.Exception.ExceptionsBase;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -41,7 +43,7 @@ namespace BarberBoss.Api.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(InvoiceResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(NotFoundException),StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(NotFoundException), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByIdInvoice([FromServices] IGetByIdInvoiceUseCase getByIdInvoiceUseCase,
                                                         [FromRoute][Required] Guid id)
         {
@@ -49,6 +51,17 @@ namespace BarberBoss.Api.Controllers
             var result = await getByIdInvoiceUseCase.Execute(id);
 
             return Ok(result);
+        }
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseError), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UpdateInvoice([FromServices] IUpdateInvoiceUseCase updateInvoiceUseCase,
+                                                       [FromRoute] Guid id, [FromBody] InvoiceRequest request)
+        {
+            await updateInvoiceUseCase.Execute(id, request);
+            return NoContent();
+
         }
 
 
@@ -62,6 +75,9 @@ namespace BarberBoss.Api.Controllers
             await deleteInvoiceUseCase.Execute(id);
 
             return NoContent();
-        } 
+        }
+
+
+
     }
 }

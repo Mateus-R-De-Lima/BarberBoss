@@ -1,28 +1,29 @@
 ﻿using BarberBoss.Domain.Entities;
 using BarberBoss.Domain.Repositories.Invoices;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace BarberBoss.Infrastructure.DataAccess.Repositories
 {
-    public class InvoicesRepository(InvoiceDbContext dbContext) : IInvoicesWriteOnlyRepository, IInvoicesReadOnlyRepository
+    public class InvoicesRepository(InvoiceDbContext dbContext) : IInvoicesWriteOnlyRepository, IInvoicesReadOnlyRepository, IIvoiceUpdateOnlyRepository
     {
         public async Task Add(Invoice invoice)
         {
-            
-           await dbContext.AddAsync(invoice);
+
+            await dbContext.AddAsync(invoice);
         }
 
         public async Task<bool> Delete(Guid id)
         {
             var result = await dbContext.Invoices.FirstOrDefaultAsync(invoice => invoice.Id.Equals(id));
-            if(result is null)
+            if (result is null)
                 return false;
 
             dbContext.Remove(result);
             return true;
         }
 
-        public async  Task<List<Invoice>> FilterByMonth(DateOnly date)
+        public async Task<List<Invoice>> FilterByMonth(DateOnly date)
         {
             var startDate = new DateTime(year: date.Year, month: date.Month, day: 1).Date;
             var daysInMonth = DateTime.DaysInMonth(year: date.Year, month: date.Month);
@@ -39,12 +40,22 @@ namespace BarberBoss.Infrastructure.DataAccess.Repositories
 
         public async Task<List<Invoice>> GetAll()
         {
-            return await dbContext.Invoices.AsNoTracking().OrderByDescending(createAt => createAt.CreatedAt) .ToListAsync();
+            return await dbContext.Invoices.AsNoTracking().OrderByDescending(createAt => createAt.CreatedAt).ToListAsync();
         }
 
-        public async Task<Invoice?> GetById(Guid id)
+         async Task<Invoice?> IInvoicesReadOnlyRepository.GetById(Guid id)
         {
             return await dbContext.Invoices.AsNoTracking().FirstOrDefaultAsync(invoice => invoice.Id.Equals(id));
+        }
+
+        async Task<Invoice?> IIvoiceUpdateOnlyRepository.GetById(Guid id)
+        {
+            return await dbContext.Invoices.FirstOrDefaultAsync(e => e.Id == id);
+        }
+
+        public void Update(Invoice expense)
+        {
+            dbContext.Invoices.Update(expense);
         }
     }
 }
