@@ -22,6 +22,7 @@ namespace BarberBoss.Infrastructure
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IInvoicesWriteOnlyRepository, InvoicesRepository>();
+            services.AddScoped<IInvoicesReadOnlyRepository, InvoicesRepository>();
 
         }
 
