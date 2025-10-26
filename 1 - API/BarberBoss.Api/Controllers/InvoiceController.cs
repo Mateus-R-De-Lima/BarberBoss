@@ -1,4 +1,5 @@
-﻿using BarberBoss.Application.UseCases.Invoices.GetAll;
+﻿using BarberBoss.Application.UseCases.Invoices.Delete;
+using BarberBoss.Application.UseCases.Invoices.GetAll;
 using BarberBoss.Application.UseCases.Invoices.GetById;
 using BarberBoss.Application.UseCases.Invoices.Register;
 using BarberBoss.Communication.Request;
@@ -49,5 +50,18 @@ namespace BarberBoss.Api.Controllers
 
             return Ok(result);
         }
+
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(NotFoundException), StatusCodes.Status404NotFound)]
+
+        public async Task<IActionResult> DeleteInvoice([FromServices] IDeleteInvoiceUseCase deleteInvoiceUseCase,
+                                                       [FromRoute] Guid id)
+        {
+            await deleteInvoiceUseCase.Execute(id);
+
+            return NoContent();
+        } 
     }
 }
