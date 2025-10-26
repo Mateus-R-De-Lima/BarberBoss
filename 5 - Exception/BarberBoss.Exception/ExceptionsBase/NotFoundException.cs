@@ -1,4 +1,6 @@
 ﻿
+using System.Net;
+
 namespace BarberBoss.Exception.ExceptionsBase
 {
     public class NotFoundException : BarberBossException
@@ -7,7 +9,7 @@ namespace BarberBoss.Exception.ExceptionsBase
         {
 
         }
-        public override int StatusCode => throw new NotImplementedException();
+        public override int StatusCode => (int)HttpStatusCode.NotFound;
 
         public override List<string> GetErros()
         {
