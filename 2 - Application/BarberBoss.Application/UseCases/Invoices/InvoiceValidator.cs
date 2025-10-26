@@ -3,7 +3,7 @@ using BarberBoss.Communication.Request;
 using BarberBoss.Exception;
 using FluentValidation;
 
-namespace BarberBoss.Application.UseCases.Invoice
+namespace BarberBoss.Application.UseCases.Invoices
 {
     public class InvoiceValidator : AbstractValidator<InvoiceRequest>
     {

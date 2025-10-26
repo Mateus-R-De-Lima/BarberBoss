@@ -1,7 +1,7 @@
 ﻿using BarberBoss.Communication.Request;
 using BarberBoss.Communication.Response;
 
-namespace BarberBoss.Application.UseCases.Invoice.Register
+namespace BarberBoss.Application.UseCases.Invoices.Register
 {
     public interface IRegisterInvoiceUseCase
     {

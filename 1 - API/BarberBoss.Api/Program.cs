@@ -1,6 +1,7 @@
 using BarberBoss.Api.Filters;
 using BarberBoss.Api.Middleware;
 using BarberBoss.Application;
+using BarberBoss.Infrastructure;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExeceptionFilter)));
 

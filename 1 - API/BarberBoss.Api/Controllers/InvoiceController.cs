@@ -1,4 +1,4 @@
-﻿using BarberBoss.Application.UseCases.Invoice.Register;
+﻿using BarberBoss.Application.UseCases.Invoices.Register;
 using BarberBoss.Communication.Request;
 using BarberBoss.Communication.Response;
 using Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,4 @@
-﻿using BarberBoss.Application.UseCases.Invoice.Register;
+﻿using BarberBoss.Application.UseCases.Invoices.Register;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BarberBoss.Application

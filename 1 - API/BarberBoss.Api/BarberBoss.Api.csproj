@@ -16,7 +16,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\2 - Application\BarberBoss.Application\BarberBoss.Application.csproj" />
     <ProjectReference Include="..\..\3 - Communication\BarberBoss.Communication\BarberBoss.Communication.csproj" />
+    <ProjectReference Include="..\..\4 - Domain\BarberBoss.Domain\BarberBoss.Domain.csproj" />
     <ProjectReference Include="..\..\5 - Exception\BarberBoss.Exception\BarberBoss.Exception.csproj" />
+    <ProjectReference Include="..\..\6 - Infrastructure\BarberBoss.Infrastructure\BarberBoss.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
