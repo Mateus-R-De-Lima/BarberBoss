@@ -1,4 +1,5 @@
-﻿using BarberBoss.Communication.Request;
+﻿using AutoMapper;
+using BarberBoss.Communication.Request;
 using BarberBoss.Communication.Response;
 using BarberBoss.Domain;
 using BarberBoss.Domain.Entities;
@@ -8,45 +9,21 @@ using BarberBoss.Exception.ExceptionsBase;
 
 namespace BarberBoss.Application.UseCases.Invoices.Register
 {
-    public class RegisterInvoiceUseCase(IInvoicesWriteOnlyRepository repository,IUnitOfWork unitOfWork) : IRegisterInvoiceUseCase
+    public class RegisterInvoiceUseCase(IInvoicesWriteOnlyRepository repository,
+                                        IMapper mapper,
+                                        IUnitOfWork unitOfWork) : IRegisterInvoiceUseCase
     {
 
         public async Task<InvoiceResponse> Execute(InvoiceRequest request)
         {
             Validate(request);
 
-            var entity = new Invoice
-            {
-                Amount = request.Amount,
-                BarberName = request.BarberName,
-                ClientName = request.ClientName,
-                Notes = request.Notes,
-                PaymentMethod = (PaymentMethod)request.PaymentMethod,
-                Status = (InvoiceStatus)request.Status,
-                ServiceName = request.ServiceName,
-                CreatedAt = DateTime.UtcNow,
-                Date = DateOnly.FromDateTime(DateTime.UtcNow),
-                UpdatedAt = DateTime.UtcNow,
-                Id = Guid.NewGuid()
-
-            };
+            var entity = mapper.Map<Invoice>(request);
 
             await repository.Add(entity);
             await unitOfWork.Commit();
 
-
-            var response = new InvoiceResponse
-            {
-                Id = entity.Id,
-                Date = entity.Date,
-                BarberName = entity.BarberName,
-                ClientName = entity.ClientName,
-                ServiceName = entity.ServiceName,
-                Amount = entity.Amount,   
-                Notes = entity.Notes,
-                CreatedAt = entity.CreatedAt,
-                UpdatedAt = entity.UpdatedAt
-            };
+            var response = mapper.Map<InvoiceResponse>(entity);
 
             return response;
         }

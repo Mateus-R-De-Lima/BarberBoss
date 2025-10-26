@@ -1,4 +1,5 @@
-﻿using BarberBoss.Application.UseCases.Invoices.Register;
+﻿using BarberBoss.Application.AutoMapper;
+using BarberBoss.Application.UseCases.Invoices.Register;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BarberBoss.Application
@@ -9,11 +10,21 @@ namespace BarberBoss.Application
         public static void AddApplication(this IServiceCollection services)
         {
             AddUseCases(services);
+            AddAutoMapper(services);
         }
 
-        public static void AddUseCases(IServiceCollection services)
+        private static void AddUseCases(IServiceCollection services)
         {
-            services.AddScoped<IRegisterInvoiceUseCase, RegisterInvoiceUseCase>();          
+            services.AddScoped<IRegisterInvoiceUseCase, RegisterInvoiceUseCase>();
+
+        }
+
+        private static void AddAutoMapper(IServiceCollection services)
+        {
+            services.AddAutoMapper(config =>
+            {
+                config.AddProfile<AutoMapping>();
+            });
 
         }
 
