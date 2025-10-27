@@ -135,8 +135,8 @@
   <data name="CLIENTNAME_REQUIRED" xml:space="preserve">
     <value>Client name is required.</value>
   </data>
-  <data name="INVOICE_NOT_FOUND" xml:space="preserve">
-    <value>Invoice not found.</value>
+  <data name="BILLING_NOT_FOUND" xml:space="preserve">
+    <value>Billing not found.</value>
   </data>
   <data name="NOTES_LENGTH" xml:space="preserve">
     <value>Notes must be up to 500 characters.</value>

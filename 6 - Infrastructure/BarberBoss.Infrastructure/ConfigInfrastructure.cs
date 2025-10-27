@@ -1,5 +1,5 @@
 ﻿using BarberBoss.Domain;
-using BarberBoss.Domain.Repositories.Invoices;
+using BarberBoss.Domain.Repositories.Billings;
 using BarberBoss.Infrastructure.DataAccess;
 using BarberBoss.Infrastructure.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -21,9 +21,9 @@ namespace BarberBoss.Infrastructure
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<IInvoicesWriteOnlyRepository, InvoicesRepository>();
-            services.AddScoped<IInvoicesReadOnlyRepository, InvoicesRepository>();
-            services.AddScoped<IIvoiceUpdateOnlyRepository, InvoicesRepository>();
+            services.AddScoped<IBillingsWriteOnlyRepository, BillingsRepository>();
+            services.AddScoped<IBillingsReadOnlyRepository, BillingsRepository>();
+            services.AddScoped<IBillingUpdateOnlyRepository, BillingsRepository>();
 
         }
 
@@ -34,7 +34,7 @@ namespace BarberBoss.Infrastructure
             var version = new Version(8, 0, 43);
             var serverVersion = new MySqlServerVersion(version);
 
-            services.AddDbContext<InvoiceDbContext>(config => config.UseMySql(connectionString, serverVersion));
+            services.AddDbContext<BillingDbContext>(config => config.UseMySql(connectionString, serverVersion));
         }
 
     }

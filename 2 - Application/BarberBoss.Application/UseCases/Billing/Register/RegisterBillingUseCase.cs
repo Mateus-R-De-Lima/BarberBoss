@@ -2,35 +2,33 @@
 using BarberBoss.Communication.Request;
 using BarberBoss.Communication.Response;
 using BarberBoss.Domain;
-using BarberBoss.Domain.Entities;
-using BarberBoss.Domain.Enums;
-using BarberBoss.Domain.Repositories.Invoices;
+using BarberBoss.Domain.Repositories.Billings;
 using BarberBoss.Exception.ExceptionsBase;
 
-namespace BarberBoss.Application.UseCases.Invoices.Register
+namespace BarberBoss.Application.UseCases.Billing.Register
 {
-    public class RegisterInvoiceUseCase(IInvoicesWriteOnlyRepository repository,
+    public class RegisterBillingUseCase(IBillingsWriteOnlyRepository repository,
                                         IMapper mapper,
-                                        IUnitOfWork unitOfWork) : IRegisterInvoiceUseCase
+                                        IUnitOfWork unitOfWork) : IRegisterBillingUseCase
     {
 
-        public async Task<InvoiceResponse> Execute(InvoiceRequest request)
+        public async Task<BillingResponse> Execute(BillingRequest request)
         {
             Validate(request);
 
-            var entity = mapper.Map<Invoice>(request);
+            var entity = mapper.Map<Domain.Entities.Billing>(request);
 
             await repository.Add(entity);
             await unitOfWork.Commit();
 
-            var response = mapper.Map<InvoiceResponse>(entity);
+            var response = mapper.Map<BillingResponse>(entity);
 
             return response;
         }
 
-        private void Validate(InvoiceRequest request)
+        private void Validate(BillingRequest request)
         {
-            var validator = new InvoiceValidator();
+            var validator = new BillingValidator();
             var result = validator.Validate(request);
 
             if (!result.IsValid)

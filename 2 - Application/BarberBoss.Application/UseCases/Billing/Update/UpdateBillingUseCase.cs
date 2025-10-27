@@ -1,25 +1,25 @@
 ﻿using AutoMapper;
 using BarberBoss.Communication.Request;
 using BarberBoss.Domain;
-using BarberBoss.Domain.Repositories.Invoices;
+using BarberBoss.Domain.Repositories.Billings;
 using BarberBoss.Exception;
 using BarberBoss.Exception.ExceptionsBase;
 
-namespace BarberBoss.Application.UseCases.Invoices.Update
+namespace BarberBoss.Application.UseCases.Billing.Update
 {
-    public class UpdateInvoiceUseCase(IIvoiceUpdateOnlyRepository repository,
+    public class UpdateBillingUseCase(IBillingUpdateOnlyRepository repository,
                                       IMapper mapper,
-                                      IUnitOfWork unitOfWork) : IUpdateInvoiceUseCase
+                                      IUnitOfWork unitOfWork) : IUpdateBillingUseCase
     {
 
-        public async Task Execute(Guid id, InvoiceRequest request)
+        public async Task Execute(Guid id, BillingRequest request)
         {
             Validate(request);
 
             var expense = await repository.GetById(id);
 
             if (expense is null)
-                throw new NotFoundException(ResourceErrorMessages.INVOICE_NOT_FOUND);
+                throw new NotFoundException(ResourceErrorMessages.BILLING_NOT_FOUND);
 
             mapper.Map(request, expense);
 
@@ -29,9 +29,9 @@ namespace BarberBoss.Application.UseCases.Invoices.Update
         }
 
 
-        private void Validate(InvoiceRequest request)
+        private void Validate(BillingRequest request)
         {
-            var validator = new InvoiceValidator();
+            var validator = new BillingValidator();
             var result = validator.Validate(request);
 
             if (!result.IsValid)

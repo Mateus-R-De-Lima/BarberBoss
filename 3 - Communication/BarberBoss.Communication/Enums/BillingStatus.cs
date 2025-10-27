@@ -1,6 +1,6 @@
 ﻿namespace BarberBoss.Communication.Enums
 {
-    public enum InvoiceStatus
+    public enum BillingStatus
     {
         Paid = 1,
         Canceled = 2

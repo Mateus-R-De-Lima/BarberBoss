@@ -97,6 +97,15 @@ namespace BarberBoss.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Billing not found..
+        /// </summary>
+        public static string BILLING_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("BILLING_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Client name must be between 2 and 120 characters..
         /// </summary>
         public static string CLIENTNAME_LENGTH {
@@ -111,15 +120,6 @@ namespace BarberBoss.Exception {
         public static string CLIENTNAME_REQUIRED {
             get {
                 return ResourceManager.GetString("CLIENTNAME_REQUIRED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Invoice not found..
-        /// </summary>
-        public static string INVOICE_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("INVOICE_NOT_FOUND", resourceCulture);
             }
         }
         

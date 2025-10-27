@@ -15,14 +15,14 @@ namespace BarberBoss.Application.AutoMapper
 
         private void AutoMappingRequest()
         {
-            CreateMap<InvoiceRequest, Invoice>();
+            CreateMap<BillingRequest, Billing>();
 
         }
 
         private void AutoMappingResponse()
         {
-            CreateMap<Invoice, InvoiceResponse>();
-            CreateMap<Invoice, InvoiceShortResponse>();
+            CreateMap<Billing, BillingResponse>();
+            CreateMap<Billing, BillingShortResponse>();
         }
     }
 }

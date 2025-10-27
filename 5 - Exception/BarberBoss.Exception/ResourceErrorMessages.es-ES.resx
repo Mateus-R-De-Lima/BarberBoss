@@ -135,7 +135,7 @@
   <data name="CLIENTNAME_REQUIRED" xml:space="preserve">
     <value>El nombre del cliente es obligatorio.</value>
   </data>
-  <data name="INVOICE_NOT_FOUND" xml:space="preserve">
+  <data name="BILLING_NOT_FOUND" xml:space="preserve">
     <value>Factura no encontrada.</value>
   </data>
   <data name="NOTES_LENGTH" xml:space="preserve">

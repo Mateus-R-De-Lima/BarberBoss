@@ -1,8 +1,8 @@
-﻿using BarberBoss.Domain.Enums;
+﻿using BarberBoss.Communication.Enums;
 
-namespace BarberBoss.Domain.Entities
+namespace BarberBoss.Communication.Response
 {
-    public class Invoice
+    public class BillingResponse
     {
         public Guid Id { get; set; }
         public DateOnly Date { get; set; }
@@ -11,7 +11,7 @@ namespace BarberBoss.Domain.Entities
         public string ServiceName { get; set; } = string.Empty;
         public decimal Amount { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
-        public InvoiceStatus Status { get; set; }
+        public BillingStatus Status { get; set; }
         public string? Notes { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

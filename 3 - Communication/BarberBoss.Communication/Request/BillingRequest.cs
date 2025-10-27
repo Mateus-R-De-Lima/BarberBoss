@@ -1,9 +1,8 @@
 ﻿using BarberBoss.Communication.Enums;
-using System.ComponentModel.DataAnnotations;
 
 namespace BarberBoss.Communication.Request
 {
-    public class InvoiceRequest
+    public class BillingRequest
     {
        
         public DateOnly Date { get; set; }       
@@ -12,7 +11,7 @@ namespace BarberBoss.Communication.Request
         public string ServiceName { get; set; } = string.Empty;      
         public decimal Amount { get; set; }     
         public PaymentMethod PaymentMethod { get; set; }       
-        public InvoiceStatus Status { get; set; }      
+        public BillingStatus Status { get; set; }      
         public string? Notes { get; set; }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using BarberBoss.Application.AutoMapper;
-using BarberBoss.Application.UseCases.Invoices.Delete;
-using BarberBoss.Application.UseCases.Invoices.GetAll;
-using BarberBoss.Application.UseCases.Invoices.GetById;
-using BarberBoss.Application.UseCases.Invoices.Register;
-using BarberBoss.Application.UseCases.Invoices.Update;
+using BarberBoss.Application.UseCases.Billing.Delete;
+using BarberBoss.Application.UseCases.Billing.GetAll;
+using BarberBoss.Application.UseCases.Billing.GetById;
+using BarberBoss.Application.UseCases.Billing.Register;
+using BarberBoss.Application.UseCases.Billing.Update;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BarberBoss.Application
@@ -19,14 +19,15 @@ namespace BarberBoss.Application
 
         private static void AddUseCases(IServiceCollection services)
         {
-            services.AddScoped<IRegisterInvoiceUseCase, RegisterInvoiceUseCase>();
-            services.AddScoped<IDeleteInvoiceUseCase, DeleteInvoiceUseCase>();
+            services.AddScoped<IRegisterBillingUseCase, RegisterBillingUseCase>();
 
-            services.AddScoped<IUpdateInvoiceUseCase, UpdateInvoiceUseCase>();
+            services.AddScoped<IDeleteBillingUseCase, DeleteBillingUseCase>();
+
+            services.AddScoped<IUpdateBillingUseCase, UpdateBillingUseCase>();
 
 
-            services.AddScoped<IGetAllInvoiceUseCase, GetAllInvoiceUseCase>();
-            services.AddScoped<IGetByIdInvoiceUseCase, GetByIdInvoiceUseCase>();
+            services.AddScoped<IGetAllBillingsUseCase, GetAllBillingsUseCase>();
+            services.AddScoped<IGetByIdBillingUseCase, GetByIdBillingUseCase>();
 
         }
 
