@@ -28,6 +28,7 @@ namespace BarberBoss.Application
 
             services.AddScoped<IGetAllBillingsUseCase, GetAllBillingsUseCase>();
             services.AddScoped<IGetByIdBillingUseCase, GetByIdBillingUseCase>();
+            services.AddScoped<IGetAllWithFiltersUseCase, GetAllWithFiltersUseCase>();
 
         }
 

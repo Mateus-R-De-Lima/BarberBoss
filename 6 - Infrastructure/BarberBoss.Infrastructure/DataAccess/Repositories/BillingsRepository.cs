@@ -1,6 +1,9 @@
-﻿using BarberBoss.Domain.Entities;
+﻿using BarberBoss.Communication.Response;
+using BarberBoss.Domain.Entities;
+using BarberBoss.Domain.Filter;
 using BarberBoss.Domain.Repositories.Billings;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace BarberBoss.Infrastructure.DataAccess.Repositories
 {
@@ -56,5 +59,48 @@ namespace BarberBoss.Infrastructure.DataAccess.Repositories
         {
             dbContext.Billings.Update(expense);
         }
+
+        public async Task<PagedResult<Billing?>> GetAllWithFilters(BillingFilter filter)
+        {
+            IQueryable<Billing> query = dbContext.Billings.AsNoTracking();
+
+            //  Filtros dinâmicos
+            if (!string.IsNullOrWhiteSpace(filter.BarberName))
+                query = query.Where(i => i.BarberName.Contains(filter.BarberName));
+
+            if (!string.IsNullOrWhiteSpace(filter.ClientName))
+                query = query.Where(i => i.ClientName.Contains(filter.ClientName));
+
+            if (filter.Status is not null)
+                query = query.Where(i => i.Status.Equals(filter.Status));
+
+            if (filter.FromDate.HasValue)
+                query = query.Where(i => i.CreatedAt >= filter.FromDate);
+
+            if (filter.ToDate.HasValue)
+                query = query.Where(i => i.CreatedAt <= filter.ToDate);
+
+            // Total antes da paginação
+            long totalCount = await query.LongCountAsync();
+
+            //  Paginação
+            var items = await query
+                .OrderByDescending(i => i.Date) // ordenação padrão
+                .Skip((filter.Page - 1) * filter.PageSize)
+                .Take(filter.PageSize)
+                .ToListAsync();
+
+            if (items.Count < 0)
+                return null;
+
+            return new PagedResult<Billing?>
+            {
+                Items = items,
+                Page = filter.Page,
+                PageSize = filter.PageSize,
+                TotalCount = totalCount
+            };
+        }
     }
+    
 }

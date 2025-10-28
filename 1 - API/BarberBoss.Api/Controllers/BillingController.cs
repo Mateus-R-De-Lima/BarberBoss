@@ -3,6 +3,7 @@ using BarberBoss.Application.UseCases.Billing.GetAll;
 using BarberBoss.Application.UseCases.Billing.GetById;
 using BarberBoss.Application.UseCases.Billing.Register;
 using BarberBoss.Application.UseCases.Billing.Update;
+using BarberBoss.Communication.Filter;
 using BarberBoss.Communication.Request;
 using BarberBoss.Communication.Response;
 using BarberBoss.Exception.ExceptionsBase;
@@ -38,6 +39,21 @@ namespace BarberBoss.Api.Controllers
             return NoContent();
 
         }
+
+        [HttpGet("filters")]
+        [ProducesResponseType(typeof(PagedResultResponse<BillingResponse?>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> GetAllBillingWithFilters([FromServices] IGetAllWithFiltersUseCase getAllWithFilters, [FromQuery] FilterRequest filter)
+        {
+            var result = await getAllWithFilters.Execute(filter);
+
+            if (result.Items.Count > 0 && result is not null)
+                return Ok(result);
+
+            return NoContent();
+
+        }
+
 
 
         [HttpGet("{id}")]

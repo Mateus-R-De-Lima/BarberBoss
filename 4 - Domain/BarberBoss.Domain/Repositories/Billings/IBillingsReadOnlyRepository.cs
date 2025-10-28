@@ -1,4 +1,6 @@
-﻿using BarberBoss.Domain.Entities;
+﻿using BarberBoss.Communication.Response;
+using BarberBoss.Domain.Entities;
+using BarberBoss.Domain.Filter;
 
 namespace BarberBoss.Domain.Repositories.Billings
 {
@@ -8,5 +10,7 @@ namespace BarberBoss.Domain.Repositories.Billings
         Task<Billing?> GetById(Guid id);
 
         Task<List<Billing>> FilterByMonth(DateOnly date);
+
+        Task<PagedResult<Billing?>> GetAllWithFilters(BillingFilter filter);
     }
 }
