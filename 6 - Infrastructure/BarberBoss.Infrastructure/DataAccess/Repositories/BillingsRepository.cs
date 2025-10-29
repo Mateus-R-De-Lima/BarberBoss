@@ -27,14 +27,14 @@ namespace BarberBoss.Infrastructure.DataAccess.Repositories
 
         public async Task<List<Billing>> FilterByMonth(DateOnly date)
         {
-            var startDate = new DateTime(year: date.Year, month: date.Month, day: 1).Date;
-            var daysInMonth = DateTime.DaysInMonth(year: date.Year, month: date.Month);
-            var endDate = new DateTime(year: date.Year, month: date.Month, day: daysInMonth, hour: 23, minute: 59, second: 59);
+            var startDate = DateOnly.FromDateTime( new DateTime(year: date.Year, month: date.Month, day: 1).Date);
+            var daysInMonth =  DateTime.DaysInMonth(year: date.Year, month: date.Month);
+            var endDate = DateOnly.FromDateTime( new DateTime(year: date.Year, month: date.Month, day: daysInMonth, hour: 23, minute: 59, second: 59));
 
             return await dbContext.Billings
                .AsNoTracking()
-               .Where(expense => expense.CreatedAt >= startDate && expense.CreatedAt <= endDate)
-               .OrderByDescending(expense => expense.CreatedAt)
+               .Where(expense => expense.Date >= startDate && expense.Date <= endDate)
+               .OrderByDescending(expense => expense.Date)
                .ThenBy(expense => expense.BarberName)
                .ToListAsync();
 

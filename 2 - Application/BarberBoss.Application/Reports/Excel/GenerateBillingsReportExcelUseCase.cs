@@ -4,7 +4,7 @@ using ClosedXML.Excel;
 
 namespace BarberBoss.Application.Reports.Excel
 {
-    public class GenerateBillingsReportExcelUseCase(IBillingsReadOnlyRepository repository)
+    public class GenerateBillingsReportExcelUseCase(IBillingsReadOnlyRepository repository) : IGenerateBillingsReportExcelUseCase
     {
         private const string CURRENCY_SYMBOL = "R$";
 
@@ -28,13 +28,22 @@ namespace BarberBoss.Application.Reports.Excel
             var raw = 2;
             foreach (var billing in billings)
             {
-                worksheet.Cell($"A{raw}").Value = billing.ServiceName;
+                worksheet.Cell($"A{raw}").Value = billing.ServiceName;                                 
+
                 worksheet.Cell($"B{raw}").Value = billing.Date.ToString();
+                worksheet.Cell($"B{raw}").Style.DateFormat.Format = DateTime.Now.ToString("DD/MM/yyyy");
+                worksheet.Cell($"B{raw}").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center); ;
+
+                    
                 worksheet.Cell($"C{raw}").Value = ConvertPaymentType(billing.PaymentMethod);
+                worksheet.Cell($"C{raw}").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center); ;
+
                 worksheet.Cell($"D{raw}").Value = billing.Amount;
-                worksheet.Cell($"D{raw}").Style.NumberFormat.Format = $"-{CURRENCY_SYMBOL} #,##0.00";
+                worksheet.Cell($"D{raw}").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right); ;
+                worksheet.Cell($"D{raw}").Style.NumberFormat.Format = $"{CURRENCY_SYMBOL} #,##0.00";
 
                 worksheet.Cell($"E{raw}").Value = billing.Notes;
+                worksheet.Cell($"E{raw}").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center); ;
                 raw++;
             }
 
@@ -52,7 +61,7 @@ namespace BarberBoss.Application.Reports.Excel
                 PaymentMethod.Cash => ResourceReportGenerationMessages.CASH,
                 PaymentMethod.CreditCard => ResourceReportGenerationMessages.CREDITCARD,
                 PaymentMethod.DebitCard => ResourceReportGenerationMessages.DEBITCARD,
-                PaymentMethod.Pix => ResourceReportGenerationMessages.PIX,                
+                PaymentMethod.Pix => ResourceReportGenerationMessages.PIX,
                 _ => ResourceReportGenerationMessages.OTHER
             };
 
@@ -68,13 +77,15 @@ namespace BarberBoss.Application.Reports.Excel
             // Font em Negrito
             worksheet.Cells("A1:E1").Style.Font.Bold = true;
             // BackgroundColor
-            worksheet.Cells("A1:E1").Style.Fill.BackgroundColor = XLColor.FromHtml("#F5C2B6");
+            worksheet.Cells("A1:E1").Style.Fill.BackgroundColor = XLColor.FromHtml("#205858");
             // Alinhamento
             worksheet.Cell("A1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
             worksheet.Cell("B1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
             worksheet.Cell("C1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
             worksheet.Cell("E1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
             worksheet.Cell("D1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
+
+         
 
 
         }

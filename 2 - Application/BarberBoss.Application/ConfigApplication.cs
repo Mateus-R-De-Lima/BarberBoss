@@ -1,4 +1,5 @@
 ﻿using BarberBoss.Application.AutoMapper;
+using BarberBoss.Application.Reports.Excel;
 using BarberBoss.Application.UseCases.Billing.Delete;
 using BarberBoss.Application.UseCases.Billing.GetAll;
 using BarberBoss.Application.UseCases.Billing.GetById;
@@ -24,6 +25,8 @@ namespace BarberBoss.Application
             services.AddScoped<IDeleteBillingUseCase, DeleteBillingUseCase>();
 
             services.AddScoped<IUpdateBillingUseCase, UpdateBillingUseCase>();
+
+            services.AddScoped<IGenerateBillingsReportExcelUseCase, GenerateBillingsReportExcelUseCase>();
 
 
             services.AddScoped<IGetAllBillingsUseCase, GetAllBillingsUseCase>();
