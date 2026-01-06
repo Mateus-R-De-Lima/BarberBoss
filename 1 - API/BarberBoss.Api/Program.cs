@@ -2,7 +2,6 @@ using BarberBoss.Api.Filters;
 using BarberBoss.Api.Middleware;
 using BarberBoss.Application;
 using BarberBoss.Infrastructure;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
