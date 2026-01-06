@@ -9,5 +9,7 @@ namespace BarberBoss.Infrastructure
 
         public DbSet<Billing> Billings { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
     }
 }
