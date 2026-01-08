@@ -1,5 +1,6 @@
 ﻿using BarberBoss.Domain;
 using BarberBoss.Domain.Repositories.Billings;
+using BarberBoss.Domain.Repositories.User;
 using BarberBoss.Infrastructure.DataAccess;
 using BarberBoss.Infrastructure.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,12 @@ namespace BarberBoss.Infrastructure
             services.AddScoped<IBillingsWriteOnlyRepository, BillingsRepository>();
             services.AddScoped<IBillingsReadOnlyRepository, BillingsRepository>();
             services.AddScoped<IBillingUpdateOnlyRepository, BillingsRepository>();
+
+
+            services.AddScoped<IUserReadOnlyRepository, UserRepository>();
+            services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
+            services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
+
 
         }
 
