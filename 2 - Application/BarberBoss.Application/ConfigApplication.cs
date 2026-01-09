@@ -5,6 +5,7 @@ using BarberBoss.Application.UseCases.Billing.GetAll;
 using BarberBoss.Application.UseCases.Billing.GetById;
 using BarberBoss.Application.UseCases.Billing.Register;
 using BarberBoss.Application.UseCases.Billing.Update;
+using BarberBoss.Application.UseCases.User.Register;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BarberBoss.Application
@@ -32,6 +33,9 @@ namespace BarberBoss.Application
             services.AddScoped<IGetAllBillingsUseCase, GetAllBillingsUseCase>();
             services.AddScoped<IGetByIdBillingUseCase, GetByIdBillingUseCase>();
             services.AddScoped<IGetAllWithFiltersUseCase, GetAllWithFiltersUseCase>();
+
+
+            services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
 
         }
 

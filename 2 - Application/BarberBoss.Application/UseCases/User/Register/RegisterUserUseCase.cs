@@ -3,17 +3,18 @@ using BarberBoss.Communication.Request;
 using BarberBoss.Communication.Response;
 using BarberBoss.Domain;
 using BarberBoss.Domain.Repositories.User;
+using BarberBoss.Domain.Security.Cryptography;
 using BarberBoss.Exception;
 using BarberBoss.Exception.ExceptionsBase;
-using Microsoft.IdentityModel.Tokens.Experimental;
 
 namespace BarberBoss.Application.UseCases.User.Register
 {
     public class RegisterUserUseCase(IMapper mapper,
         IUnitOfWork unitOfWork,
+        IPasswordEncripter passwordEncripter,
         IUserReadOnlyRepository userReadOnlyRepository,
-        IUserWriteOnlyRepository userWriteOnlyRepository       
-        )
+        IUserWriteOnlyRepository userWriteOnlyRepository
+        ) : IRegisterUserUseCase
     {
 
         public async Task<ResponseRegisteredUser> Execute(RequestUser request)
@@ -21,6 +22,10 @@ namespace BarberBoss.Application.UseCases.User.Register
             await Validate(request);
 
             var userEntity = mapper.Map<Domain.Entities.User>(request);
+
+            userEntity.PasswordHash = passwordEncripter.Encrypt(request.Password);
+            userEntity.UpdatedAt = DateTime.UtcNow;
+            userEntity.CreatedAt = DateTime.UtcNow;
 
             await userWriteOnlyRepository.Add(userEntity);
 
@@ -40,13 +45,13 @@ namespace BarberBoss.Application.UseCases.User.Register
             if (!result.IsValid)
             {
                 var errorMessages = result.Errors.Select(i => i.ErrorMessage).ToList();
-                
+
                 throw new ErrorOnValidationException(errorMessages);
             }
 
             var emailExist = await userReadOnlyRepository.ExistActiveUserWithEmail(request.Email);
 
-            if(emailExist)
+            if (emailExist)
                 throw new ErrorOnValidationException([ResourceErrorMessages.EMAIL_ALREADY_REGISTERED]);
         }
     }

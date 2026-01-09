@@ -1,6 +1,7 @@
 ﻿using BarberBoss.Domain;
 using BarberBoss.Domain.Repositories.Billings;
 using BarberBoss.Domain.Repositories.User;
+using BarberBoss.Domain.Security.Cryptography;
 using BarberBoss.Infrastructure.DataAccess;
 using BarberBoss.Infrastructure.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,8 @@ namespace BarberBoss.Infrastructure
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
             services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
+
+            services.AddScoped<IPasswordEncripter, Security.BCrypt>();
 
 
         }
