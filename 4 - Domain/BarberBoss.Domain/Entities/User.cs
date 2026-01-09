@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BarberBoss.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace BarberBoss.Domain.Entities
 {
@@ -10,5 +11,6 @@ namespace BarberBoss.Domain.Entities
         public string PasswordHash { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } 
         public DateTime UpdatedAt { get; set; }
+        public string Role { get; set; } = Roles.TEAM_MEMBER;
     }
 }

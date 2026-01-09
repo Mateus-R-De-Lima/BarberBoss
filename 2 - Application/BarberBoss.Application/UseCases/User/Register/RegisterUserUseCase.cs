@@ -4,6 +4,7 @@ using BarberBoss.Communication.Response;
 using BarberBoss.Domain;
 using BarberBoss.Domain.Repositories.User;
 using BarberBoss.Domain.Security.Cryptography;
+using BarberBoss.Domain.Security.Token;
 using BarberBoss.Exception;
 using BarberBoss.Exception.ExceptionsBase;
 
@@ -12,6 +13,7 @@ namespace BarberBoss.Application.UseCases.User.Register
     public class RegisterUserUseCase(IMapper mapper,
         IUnitOfWork unitOfWork,
         IPasswordEncripter passwordEncripter,
+        IAccessTokenGenarator accessTokenGenarator,
         IUserReadOnlyRepository userReadOnlyRepository,
         IUserWriteOnlyRepository userWriteOnlyRepository
         ) : IRegisterUserUseCase
@@ -34,7 +36,7 @@ namespace BarberBoss.Application.UseCases.User.Register
             return new ResponseRegisteredUser
             {
                 Name = request.Name,
-                Token = "fake-jwt"
+                Token = accessTokenGenarator.Generate(userEntity)
             };
         }
 
