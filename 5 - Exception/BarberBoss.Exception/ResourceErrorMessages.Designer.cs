@@ -151,6 +151,15 @@ namespace BarberBoss.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Invalid e-mail and/or password..
+        /// </summary>
+        public static string EMAIL_OR_PASSWORD_INVALID {
+            get {
+                return ResourceManager.GetString("EMAIL_OR_PASSWORD_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Your password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number..
         /// </summary>
         public static string INVALID_PASSWORD {
