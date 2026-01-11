@@ -1,5 +1,6 @@
 ﻿using BarberBoss.Application.UseCases.User.GetProfile;
 using BarberBoss.Application.UseCases.User.Register;
+using BarberBoss.Application.UseCases.User.UpdateProfile;
 using BarberBoss.Communication.Request;
 using BarberBoss.Communication.Response;
 using Microsoft.AspNetCore.Authorization;
@@ -34,5 +35,18 @@ namespace BarberBoss.Api.Controllers
             var response = await useCase.Execute();
             return Ok(response);
         }
+
+
+        [HttpPut("profile")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseError),StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> PutProfile([FromServices] IUpdateUserProfileUseCase useCase,
+                                                    [FromBody] RequestUpdateProfile request)
+        {
+            await useCase.Execute(request);
+            return NoContent();
+        }
+
     }
 }
