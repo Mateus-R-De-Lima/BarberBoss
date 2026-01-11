@@ -221,5 +221,14 @@ namespace BarberBoss.Exception {
                 return ResourceManager.GetString("STATUS_INVALID", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a User Not Found..
+        /// </summary>
+        public static string USER_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("USER_NOT_FOUND", resourceCulture);
+            }
+        }
     }
 }

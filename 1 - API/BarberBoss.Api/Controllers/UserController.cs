@@ -1,4 +1,5 @@
-﻿using BarberBoss.Application.UseCases.User.GetProfile;
+﻿using BarberBoss.Application.UseCases.User.Delete;
+using BarberBoss.Application.UseCases.User.GetProfile;
 using BarberBoss.Application.UseCases.User.Register;
 using BarberBoss.Application.UseCases.User.UpdateProfile;
 using BarberBoss.Communication.Request;
@@ -47,6 +48,18 @@ namespace BarberBoss.Api.Controllers
             await useCase.Execute(request);
             return NoContent();
         }
+
+        [HttpDelete]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete([FromServices] IDeleteProfileUserUseCase useCase)
+        {
+            await useCase.Execute();
+            return NoContent();
+        }
+
+      
 
     }
 }
