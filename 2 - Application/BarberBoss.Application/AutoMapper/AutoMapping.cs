@@ -22,13 +22,19 @@ namespace BarberBoss.Application.AutoMapper
             CreateMap<FilterRequest, BillingFilter>()
                 .ForMember(s => s.Status, opt => opt.MapFrom(s => s.Status));
 
+
+            CreateMap<RequestUser, User>()
+                .ForMember(dest => dest.Username, config => config.MapFrom(origem => origem.Name));
+
         }
 
         private void AutoMappingResponse()
         {
             CreateMap<Billing, BillingResponse>();
             CreateMap<Billing, BillingShortResponse>();
-          
+
+            CreateMap<User, ResponseUserProfile>();               
+                
         }
     }
 }

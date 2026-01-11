@@ -5,6 +5,13 @@ using BarberBoss.Application.UseCases.Billing.GetAll;
 using BarberBoss.Application.UseCases.Billing.GetById;
 using BarberBoss.Application.UseCases.Billing.Register;
 using BarberBoss.Application.UseCases.Billing.Update;
+using BarberBoss.Application.UseCases.LoggerUser;
+using BarberBoss.Application.UseCases.User.ChangePassword;
+using BarberBoss.Application.UseCases.User.Delete;
+using BarberBoss.Application.UseCases.User.DoLogin;
+using BarberBoss.Application.UseCases.User.GetProfile;
+using BarberBoss.Application.UseCases.User.Register;
+using BarberBoss.Application.UseCases.User.UpdateProfile;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BarberBoss.Application
@@ -32,6 +39,17 @@ namespace BarberBoss.Application
             services.AddScoped<IGetAllBillingsUseCase, GetAllBillingsUseCase>();
             services.AddScoped<IGetByIdBillingUseCase, GetByIdBillingUseCase>();
             services.AddScoped<IGetAllWithFiltersUseCase, GetAllWithFiltersUseCase>();
+
+
+            services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+            services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
+            services.AddScoped<IUpdateUserProfileUseCase, UpdateUserProfileUseCase>();
+            services.AddScoped<IDeleteProfileUserUseCase, DeleteProfileUserUseCase>();
+            services.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
+
+            services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+
+            services.AddScoped<ILoggerUser, LoggerUser>();
 
         }
 
