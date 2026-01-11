@@ -1,6 +1,8 @@
 using BarberBoss.Api.Filters;
 using BarberBoss.Api.Middleware;
+using BarberBoss.Api.Token;
 using BarberBoss.Application;
+using BarberBoss.Domain.Security.Token;
 using BarberBoss.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -19,6 +21,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExeceptionFilter)));
 
