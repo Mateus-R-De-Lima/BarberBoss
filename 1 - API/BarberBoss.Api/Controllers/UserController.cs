@@ -1,6 +1,8 @@
-﻿using BarberBoss.Application.UseCases.User.Register;
+﻿using BarberBoss.Application.UseCases.User.GetProfile;
+using BarberBoss.Application.UseCases.User.Register;
 using BarberBoss.Communication.Request;
 using BarberBoss.Communication.Response;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarberBoss.Api.Controllers
@@ -21,6 +23,16 @@ namespace BarberBoss.Api.Controllers
             var response = await useCase.Execute(request);
 
             return Created(string.Empty, response);
+        }
+
+
+        [HttpGet("profile")]
+        [ProducesResponseType(typeof(ResponseUserProfile),StatusCodes.Status200OK)]
+        [Authorize]
+        public async Task<IActionResult> GetProfile([FromServices] IGetUserProfileUseCase useCase)
+        {
+            var response = await useCase.Execute();
+            return Ok(response);
         }
     }
 }

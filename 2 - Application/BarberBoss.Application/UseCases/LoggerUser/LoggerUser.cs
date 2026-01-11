@@ -5,11 +5,11 @@ using System.IdentityModel.Tokens.Jwt;
 
 namespace BarberBoss.Application.UseCases.LoggerUser
 {
-    public class LoggerUser(IUserReadOnlyRepository userReadOnlyRepository, ITokenProvider tokenProvider)
+    public class LoggerUser(IUserReadOnlyRepository userReadOnlyRepository, ITokenProvider tokenProvider) : ILoggerUser
     {
         public async Task<Domain.Entities.User> Get()
         {
-            var token  = tokenProvider.TokenOnRequest();
+            var token = tokenProvider.TokenOnRequest();
 
             var tokenHandler = new JwtSecurityTokenHandler();
 

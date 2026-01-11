@@ -31,8 +31,10 @@ namespace BarberBoss.Application.AutoMapper
         private void AutoMappingResponse()
         {
             CreateMap<Billing, BillingResponse>();
-            CreateMap<Billing, BillingShortResponse>();          
+            CreateMap<Billing, BillingShortResponse>();
 
+            CreateMap<User, ResponseUserProfile>();               
+                
         }
     }
 }
