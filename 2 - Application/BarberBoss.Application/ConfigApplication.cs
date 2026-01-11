@@ -6,6 +6,7 @@ using BarberBoss.Application.UseCases.Billing.GetById;
 using BarberBoss.Application.UseCases.Billing.Register;
 using BarberBoss.Application.UseCases.Billing.Update;
 using BarberBoss.Application.UseCases.LoggerUser;
+using BarberBoss.Application.UseCases.User.ChangePassword;
 using BarberBoss.Application.UseCases.User.Delete;
 using BarberBoss.Application.UseCases.User.DoLogin;
 using BarberBoss.Application.UseCases.User.GetProfile;
@@ -44,6 +45,7 @@ namespace BarberBoss.Application
             services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
             services.AddScoped<IUpdateUserProfileUseCase, UpdateUserProfileUseCase>();
             services.AddScoped<IDeleteProfileUserUseCase, DeleteProfileUserUseCase>();
+            services.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
 
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
 

@@ -1,4 +1,5 @@
-﻿using BarberBoss.Application.UseCases.User.Delete;
+﻿using BarberBoss.Application.UseCases.User.ChangePassword;
+using BarberBoss.Application.UseCases.User.Delete;
 using BarberBoss.Application.UseCases.User.GetProfile;
 using BarberBoss.Application.UseCases.User.Register;
 using BarberBoss.Application.UseCases.User.UpdateProfile;
@@ -59,7 +60,20 @@ namespace BarberBoss.Api.Controllers
             return NoContent();
         }
 
-      
+
+        [HttpPut("change-password")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> ChangePassword([FromServices] IChangePasswordUseCase useCase,
+                                                        [FromBody] RequestChangePassword request)
+        {
+            await useCase.Execute(request);
+            return NoContent();
+        }
+
+
+
 
     }
 }

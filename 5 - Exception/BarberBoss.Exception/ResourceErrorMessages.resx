@@ -174,4 +174,7 @@
   <data name="USER_NOT_FOUND" xml:space="preserve">
     <value>User Not Found.</value>
   </data>
+  <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
+    <value>The new password must be different from the current password.</value>
+  </data>
 </root>
